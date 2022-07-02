@@ -11,7 +11,7 @@
   <div
     class="mx-3 mt-4 border-radius-xl position-relative"
     :style="{
-      backgroundImage: 'url(' + require('@/assets/img/vr-bg.jpg') + ')',
+     
       backgroundSize: 'cover'
     }"
   >

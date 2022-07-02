@@ -96,45 +96,30 @@
               </div>
             </div>
             <div class="card-body">
-              <Form @submit="handleRegister" :validation-schema="schema">
-                <div v-if="!submitted">
-                  <div class="form-group">
-                    <label>Tên người dùng</label>
-                    <Field name="username" type="text" class="form-control col-md-6" />
-                    <ErrorMessage name="username" class="error-feedback" />
-                  </div>
-
-                  <div class="form-group">
-                    <label>Email</label>
-                    <Field name="email" type="email" class="form-control col-md-6" />
-                    <ErrorMessage name="email" class="error-feedback" />
-                  </div>
-
-                  <div class="form-group">
-                    <label>Mật khẩu</label>
-                    <Field name="password" type="password" class="form-control col-md-6" />
-                    <ErrorMessage name="password" class="error-feedback" />
-                  </div>
-                  <argon-checkbox checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Tôi đồng ý
-                      <a
-                              href="javascript:;"
-                              class="text-dark font-weight-bolder"
-                      >Các điều khoản và điều kiện</a>
-                    </label>
-                  </argon-checkbox>
-                  <div class="text-center">
-                    <argon-button fullWidth color="dark" variant="gradient" class="my-4 mb-2">Đăng ký</argon-button>
-                  </div>
-                  <p class="text-sm mt-3 mb-0">
-                    Bạn đã có tài khoản?
-                    <router-link class="text-dark font-weight-bolder" to="/signin">
-                      Đăng nhập
-                    </router-link>
-                  </p>
+              <form role="form">
+                <argon-input type="text" placeholder="Name" aria-label="Name" />
+                <argon-input type="email" placeholder="Email" aria-label="Email" />
+                <argon-input type="password" placeholder="Password" aria-label="Password" />
+                <argon-checkbox checked>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    I agree the
+                    <a
+                      href="javascript:;"
+                      class="text-dark font-weight-bolder"
+                    >Terms and Conditions</a>
+                  </label>
+                </argon-checkbox>
+                <div class="text-center">
+                  <argon-button fullWidth color="dark" variant="gradient" class="my-4 mb-2">Sign up</argon-button>
                 </div>
-              </Form>
+                <p class="text-sm mt-3 mb-0">
+                  Already have an account?
+                  <a
+                    href="javascript:;"
+                    class="text-dark font-weight-bolder"
+                  >Sign in</a>
+                </p>
+              </form>
             </div>
           </div>
         </div>
@@ -147,80 +132,19 @@
 <script>
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
-/*import ArgonInput from "@/components/ArgonInput.vue";*/
+import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 const body = document.getElementsByTagName("body")[0];
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
 
 export default {
   name: "signin",
   components: {
     Navbar,
     AppFooter,
-    /*ArgonInput,*/
+    ArgonInput,
     ArgonCheckbox,
     ArgonButton,
-    Form,
-    Field,
-    ErrorMessage,
-  },
-  data() {
-    const schema = yup.object().shape({
-      username: yup
-              .string()
-              .required("Username is required!")
-              .min(3, "Must be at least 3 characters!")
-              .max(20, "Must be maximum 20 characters!"),
-      email: yup
-              .string()
-              .required("Email is required!")
-              .email("Email is invalid!")
-              .max(50, "Must be maximum 50 characters!"),
-      password: yup
-              .string()
-              .required("Password is required!")
-              .min(6, "Must be at least 6 characters!")
-              .max(40, "Must be maximum 40 characters!"),
-    });
-    return {
-      user: {
-        id: null,
-        username: "",
-        email: "",
-        password: ""
-      },
-      loading: false,
-      message: "",
-      schema,
-      submitted: false
-    };
-  },
-  methods: {
-    handleRegister(user) {
-      this.message = "";
-      this.submitted = false;
-      this.loading = true;
-
-      this.$store.dispatch("register", user).then(
-              (data) => {
-                this.message = data.message;
-                this.submitted = true;
-                this.loading = false;
-              },
-              (error) => {
-                this.message =
-                        (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-                this.submitted = false;
-                this.loading = false;
-              }
-      );
-    }
   },
   created() {
     this.$store.state.hideConfigButton = true;

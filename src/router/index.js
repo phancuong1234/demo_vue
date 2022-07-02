@@ -7,8 +7,6 @@ import RTL from "../views/Rtl.vue";
 import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
-import UserList from "../views/User/UserList.vue";
-/*const Profile = () => import("./view/components/Profile.vue")*/
 
 const routes = [
   {
@@ -55,21 +53,6 @@ const routes = [
     path: "/signup",
     name: "Signup",
     component: Signup,
-  },
-  {
-    path: "/users",
-    name: "users",
-    component: UserList
-  },
-  {
-    path: "/user/:id",
-    name: "user-details",
-    component: () => import("../views/User/UpdateUser")
-  },
-  {
-    path: "/add",
-    name: "add",
-    component: () => import("../views/User/AddUser")
   },
   
 ];

@@ -39,18 +39,7 @@
           </template>
         </sidenav-item>
       </li>
-      <li v-if="showAdminBoard" class="nav-item">
-        <sidenav-item
-                url="/users"
-                :class="getRoute() === 'users' ? 'active' : ''"
-                :navText="'Users'"
-        >
-          <template v-slot:icon>
-            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <!--<li class="nav-item">
+      <li class="nav-item">
         <sidenav-item
           url="/virtual-reality"
           :class="getRoute() === 'virtual-reality' ? 'active' : ''"
@@ -73,7 +62,7 @@
             <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
           </template>
         </sidenav-item>
-      </li>-->
+      </li>
       <li class="mt-3 nav-item">
         <h6
           v-if="this.$store.state.isRTL"
@@ -101,45 +90,28 @@
           </template>
         </sidenav-item>
       </li>
-
-      <div v-if="!currentUser" class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <sidenav-item
-                  url="/signin"
-                  :class="getRoute() === 'signin' ? 'active' : ''"
-                  :navText="this.$store.state.isRTL ? 'تسجيل الدخول' : 'Sign In'"
-          >
-            <template v-slot:icon>
-              <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
-            </template>
-          </sidenav-item>
-        </li>
-        <li class="nav-item">
-          <sidenav-item
-                  url="/signup"
-                  :class="getRoute() === 'signup' ? 'active' : ''"
-                  :navText="this.$store.state.isRTL ? 'اشتراك' : 'Sign Up'"
-          >
-            <template v-slot:icon>
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </template>
-          </sidenav-item>
-        </li>
-      </div>
-
-      <div v-if="currentUser" class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <sidenav-item
-                  url=""
-                  @click.prevent="logOut"
-                  :navText="'Logout'"
-          >
-            <template v-slot:icon>
-              <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
-            </template>
-          </sidenav-item>
-        </li>
-      </div>
+      <li class="nav-item">
+        <sidenav-item
+          url="/signin"
+          :class="getRoute() === 'signin' ? 'active' : ''"
+          :navText="this.$store.state.isRTL ? 'تسجيل الدخول' : 'Sign In'"
+        >
+          <template v-slot:icon>
+            <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item
+          url="/signup"
+          :class="getRoute() === 'signup' ? 'active' : ''"
+          :navText="this.$store.state.isRTL ? 'اشتراك' : 'Sign Up'"
+        >
+          <template v-slot:icon>
+            <i class="ni ni-collection text-info text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
@@ -161,22 +133,10 @@ export default {
   },
   data() {
     return {
-      title: "SDT DEMO",
+      title: "Argon Dashboard 2",
       controls: "dashboardsExamples",
       isActive: "active"
     };
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.initialState.user;
-    },
-    showAdminBoard() {
-      if (this.currentUser && this.currentUser['roles']) {
-        return this.currentUser['roles'].includes('ROLE_ADMIN');
-      }
-
-      return false;
-    },
   },
   components: {
     SidenavItem,
@@ -186,10 +146,6 @@ export default {
     getRoute() {
       const routeArr = this.$route.path.split("/");
       return routeArr[1];
-    },
-    logOut() {
-      this.$store.dispatch('logout');
-      this.$router.push('/signin');
     }
   }
 };

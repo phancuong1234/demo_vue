@@ -25,8 +25,8 @@
             </div>
             <div class="col-auto my-auto">
               <div class="h-100">
-                <h5 class="mb-1">{{currentUser.username}}</h5>
-                <p class="mb-0 font-weight-bold text-sm">{{currentUser.email}}</p>
+                <h5 class="mb-1">Sayo Kravits</h5>
+                <p class="mb-0 font-weight-bold text-sm">Public Relations</p>
               </div>
             </div>
             <div
@@ -308,20 +308,12 @@ export default {
       showMenu: false
     };
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.initialState.user;
-    }
-  },
   components: { ProfileCard, ArgonInput, ArgonButton },
 
   mounted() {
     this.$store.state.isAbsolute = true;
     setNavPills();
     setTooltip();
-    if (!this.currentUser) {
-      this.$router.push('/login');
-    }
   },
   beforeMount() {
     this.$store.state.imageLayout = "profile-overview";

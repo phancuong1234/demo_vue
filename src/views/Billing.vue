@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-8">
         <div class="row mt-4">
           <div class="col-xl-6 mb-xl-0 mb-4">
@@ -42,27 +42,28 @@
       <div class="col-md-5">
         <transaction-card />
       </div>
-    </div>
+    </div> -->
+    <EasyDataTable :headers="headers" :items="items" />
   </div>
 </template>
 
 <script>
-import MasterCard from "@/examples/Cards/MasterCard.vue";
-import DefaultInfoCard from "@/examples/Cards/DefaultInfoCard.vue";
-import PaymentCard from "./components/PaymentCard.vue";
-import InvoiceCard from "./components/InvoiceCard.vue";
-import BillingCard from "./components/BillingCard.vue";
-import TransactionCard from "./components/TransactionCard.vue";
+// import MasterCard from "@/examples/Cards/MasterCard.vue";
+// import DefaultInfoCard from "@/examples/Cards/DefaultInfoCard.vue";
+// import PaymentCard from "./components/PaymentCard.vue";
+// import InvoiceCard from "./components/InvoiceCard.vue";
+// import BillingCard from "./components/BillingCard.vue";
+// import TransactionCard from "./components/TransactionCard.vue";
 
 export default {
   name: "Billing",
   components: {
-    MasterCard,
-    DefaultInfoCard,
-    PaymentCard,
-    InvoiceCard,
-    BillingCard,
-    TransactionCard,
+    // MasterCard,
+    // DefaultInfoCard,
+    // PaymentCard,
+    // InvoiceCard,
+    // BillingCard,
+    // TransactionCard,
   },
   data() {
     return {
@@ -78,6 +79,17 @@ export default {
         desc: "Freelance Payment",
         price: "$455.00",
       },
+      headers: [
+        { text: "Name", value: "name" },
+        { text: "Height (cm)", value: "height", sortable: true },
+        { text: "Weight (kg)", value: "weight", sortable: true },
+        { text: "Age", value: "age", sortable: true },
+      ],
+      items: [
+        { name: "Curry", height: 178, weight: 77, age: 20 },
+        { name: "James", height: 180, weight: 75, age: 21 },
+        { name: "Jordan", height: 181, weight: 73, age: 22 },
+      ],
     };
   },
 };
